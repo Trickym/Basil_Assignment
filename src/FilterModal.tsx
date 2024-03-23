@@ -1,8 +1,14 @@
-import { Avatar, Button, Card, Input, Modal, Table, TableColumnsType, Tag } from 'antd'
+import { Avatar, Button, Calendar, Card, Input, Modal, Table, TableColumnsType, Tag } from 'antd'
 import { SearchOutlined } from "@ant-design/icons";
-import React from 'react'
+import React, { useState } from 'react'
 import generateMachines from './utils/generateMachines';
-
+import Successfull from './assets/success.png'
+import Pending from './assets/pending.png'
+import Sent from './assets/sending.png'
+import RefundInitiated from './assets/refund_initiated.png'
+import RefundComplete from './assets/refund_completed.png'
+import Failure from './assets/failure.png'
+import dayjs from 'dayjs';
 interface FilterModalProps {
   open: any;
   onClose: () => void;
@@ -12,8 +18,34 @@ interface MachineItem {
   name: string;
   address: string;
 }
-
+const statusList = [
+  {
+    name: 'Successfull',
+    icon: Successfull
+  },
+  {
+    name: 'Pending',
+    icon: Pending
+  },
+  {
+    name: 'Sent',
+    icon: Sent
+  },
+  {
+    name: 'Failure',
+    icon: Failure
+  },
+  {
+    name: 'Refund Initiated',
+    icon: RefundInitiated
+  },
+  {
+    name: 'Refund Completed',
+    icon: RefundComplete
+  },
+]
 const FilterModal: React.FC<FilterModalProps> = ({ open, onClose }) => {
+  const [selectedStatus, setSelectedStatus] = useState('Successfull')
   const columns: TableColumnsType<MachineItem> = [
     {
       title: <span className="text-primary">MACHINE NAME</span>,
@@ -60,13 +92,55 @@ const FilterModal: React.FC<FilterModalProps> = ({ open, onClose }) => {
           <div className="mt-2">
             <Table columns={columns} rowKey={(data: MachineItem) => data.id} rowSelection={{}} pagination={{ pageSize: 5 }} dataSource={generateMachines(20)} />
           </div>
+        </Card>
+        <div className="mt-3">
+          <div className="">Status</div>
           <div className="mt-2">
-            <div className="">Status</div>
-            <div className="mt-2">
-
+            <div className="d-flex flex-wrap gap-3">
+              {
+                statusList?.map(({ name, icon }) => (
+                  <div onClick={() => {
+                    setSelectedStatus(name)
+                  }} className={(selectedStatus == name) ? "status-tag-selected" : "status-tag"} key={name}>
+                    <div className="">
+                      <img src={icon} alt={name} height={30} />
+                    </div>
+                    <div className="mt-2">
+                      {name}
+                    </div>
+                  </div>
+                ))
+              }
             </div>
           </div>
-        </Card>
+        </div>
+        <div className="mt-3">
+          Date Range
+          <Card style={{ borderColor: '#CED4DA' }} className='mt-3'>
+            <div className="row">
+              <div className="col-md-6">
+                <Calendar headerRender={
+                  ({ value }) => (
+                    <div className='mb-3'>
+                      <div>From :</div>
+                      <Input allowClear className='w-100 my-2' value={dayjs(value).format('MMMM DD, YYYY')} />
+                    </div>
+                  )
+                } fullscreen={false} />
+              </div>
+              <div className="col-md-6">
+                <Calendar headerRender={
+                  ({ value }) => (
+                    <div className='mb-3'>
+                      <div>To :</div>
+                      <Input allowClear className='w-100 my-2' value={dayjs(value).format('MMMM DD, YYYY')} />
+                    </div>
+                  )
+                } fullscreen={false} />
+              </div>
+            </div>
+          </Card>
+        </div>
       </div>
     </Modal>
   )

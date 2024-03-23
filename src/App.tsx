@@ -3,6 +3,7 @@ import './App.css'
 import Home from './Home'
 import MainLayout from './Layout'
 import Orders from './Orders'
+import OrderDetails from './OrderDetails'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/orders" element={<Orders />} />
+            <Route path="/orders/:id" element={<OrderDetails />} />
           </Routes>
         </MainLayout>
       </Router>

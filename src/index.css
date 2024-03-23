@@ -106,9 +106,12 @@ body{
   border: 1px solid #CED4DA;
   padding: 16px;
   border-radius: 8px;
+  min-width: 120px;
 }
 
 .status-tag-selected{
+  min-width: 120px;
+
   border: 1px solid #333333;
   padding: 16px;
   border-radius: 8px;

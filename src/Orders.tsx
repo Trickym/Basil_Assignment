@@ -4,6 +4,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import generateOrdersArray from "./utils/generateOrders";
 import dayjs from "dayjs";
 import FilterModal from "./FilterModal";
+import { useNavigate } from "react-router-dom";
 interface OrderItem {
     serialNo: number;
     date: string;
@@ -19,6 +20,16 @@ const Orders: React.FC = () => {
     const [orders, setOrders] = useState<OrderItem[]>([]);
     const [modalOpen, setModalOpen] = useState<Boolean>(false)
     const [loading, setLoading] = useState(true)
+    const navigate = useNavigate()
+    const handleRowClick = (record: any) => {
+        navigate(`/orders/${record?.orderId}`)
+    };
+    const rowProps = (record: any) => {
+        return {
+            onClick: () => handleRowClick(record),
+        };
+    };
+
     useEffect(() => {
         fetchData()
     }, [])
@@ -128,7 +139,7 @@ const Orders: React.FC = () => {
                         <div >Refunds Initiated: 3</div>
                     </div>
                     <div className="mt-3">
-                        <Table dataSource={orders} columns={columns} loading={loading} pagination={{ pageSize: 3 }} />
+                        <Table rowClassName={() => 'clickable-row'} onRow={rowProps} dataSource={orders} columns={columns} loading={loading} pagination={{ pageSize: 3 }} />
                     </div>
                 </div>
                 <div className="col-md-4 p-2">
