@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 async function generateOrdersArray(): Promise<any[]> {
-    return new Promise<any[]>((resolve, reject) => {
+    return new Promise<any[]>((resolve) => {
         let ordersArray: any[] = [];
         for (let i = 1; i <= 20; i++) {
             ordersArray.push({

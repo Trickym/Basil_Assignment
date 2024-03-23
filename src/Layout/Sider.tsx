@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
+import React, { } from 'react';
 import {
-    AppstoreOutlined,
-    ContainerOutlined,
-    DesktopOutlined,
-    MailOutlined,
     SettingOutlined,
     LogoutOutlined,
-    PieChartOutlined,
     HomeOutlined,
-    PictureOutlined,
     UsergroupAddOutlined
 
 } from '@ant-design/icons';
-import HomeIcon from '../assets/HomeIcon.svg'
 import type { MenuProps } from 'antd';
-import { Avatar, Button, Menu, theme } from 'antd';
+import { Avatar, Menu, theme } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { useNavigate } from 'react-router-dom';
 

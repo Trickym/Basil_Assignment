@@ -1,10 +1,8 @@
-import { Avatar, Badge, Input, Space, theme } from "antd";
-import { Header } from "antd/es/layout/layout"
+import { Avatar, Badge, Input, theme } from "antd";
 import React from "react"
 import { NotificationOutlined, SearchOutlined } from '@ant-design/icons';
 const MainHeader: React.FC = () => {
   const {
-    token: { colorBgContainer },
   } = theme.useToken();
   return (
     <div
